@@ -1,5 +1,7 @@
 const TelegramApi = require('node-telegram-bot-api')
 const {gameOptions, againOptions} = require('./option')
+const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize('postgres://postgres:postgres@localhost:5432/chat')
 const toket = '5871752665:AAEwtQWq57PHr5a9Cz1nxge95DZx5nRKbVg'
 
 const bot = new TelegramApi(toket, {polling: true})
@@ -13,8 +15,15 @@ const startGame = async (chatId) => {
     await bot.sendMessage(chatId, `Отгадай`, gameOptions);
 }
 
-const start = () => {
+const start = async () => {
     
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+      } catch (error) {
+        console.error('Unable to conzzznect to the databasee:', error);
+      }
+
     bot.setMyCommands([
         {command: '/start', description: 'Начало'},
         {command: '/info', description: 'Информация'},
