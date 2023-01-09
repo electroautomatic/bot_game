@@ -41,7 +41,9 @@ const start = async () => {
         
         try {
             if (text === '/start'){
-                const UserSession = UserModel.build({chatId})
+                const FindUser = await UserModel.findOne({chatId})
+                if (FindUser === null)
+                    await UserModel.create({chatId})
              
                 bot.sendSticker(chatId, 'https://cdn.tlgrm.app/stickers/ea5/382/ea53826d-c192-376a-b766-e5abc535f1c9/192/8.webp');
                 return bot.sendMessage(chatId, `Добро пожаловать в Игру`);
