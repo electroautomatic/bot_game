@@ -1,7 +1,7 @@
 const TelegramApi = require('node-telegram-bot-api')
 const {gameOptions, againOptions} = require('./option')
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('postgres://postgres:postgres@localhost:5432/chat')
+const sequelize = new Sequelize('postgres://user:pass@localhost:5432/dbname')
 const toket = '5871752665:AAEwtQWq57PHr5a9Cz1nxge95DZx5nRKbVg'
 
 const bot = new TelegramApi(toket, {polling: true})
